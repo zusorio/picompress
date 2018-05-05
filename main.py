@@ -1,6 +1,6 @@
-import re, random
-
-uncompress_dict = {'00': '0',
+import re
+import random
+decompress_dict = {'00': '0',
                    '01': '1',
                    '02': '2',
                    '03': '3',
@@ -101,113 +101,112 @@ uncompress_dict = {'00': '0',
                    '98': '\x0b',
                    '99': '\x0c'
                    }
-
 compress_dict = {
-    '0': '00',
-    '1': '01',
-    '2': '02',
-    '3': '03',
-    '4': '04',
-    '5': '05',
-    '6': '06',
-    '7': '07',
-    '8': '08',
-    '9': '09',
-    'a': '10',
-    'b': '11',
-    'c': '12',
-    'd': '13',
-    'e': '14',
-    'f': '15',
-    'g': '16',
-    'h': '17',
-    'i': '18',
-    'j': '19',
-    'k': '20',
-    'l': '21',
-    'm': '22',
-    'n': '23',
-    'o': '24',
-    'p': '25',
-    'q': '26',
-    'r': '27',
-    's': '28',
-    't': '29',
-    'u': '30',
-    'v': '31',
-    'w': '32',
-    'x': '33',
-    'y': '34',
-    'z': '35',
-    'A': '36',
-    'B': '37',
-    'C': '38',
-    'D': '39',
-    'E': '40',
-    'F': '41',
-    'G': '42',
-    'H': '43',
-    'I': '44',
-    'J': '45',
-    'K': '46',
-    'L': '47',
-    'M': '48',
-    'N': '49',
-    'O': '50',
-    'P': '51',
-    'Q': '52',
-    'R': '53',
-    'S': '54',
-    'T': '55',
-    'U': '56',
-    'V': '57',
-    'W': '58',
-    'X': '59',
-    'Y': '60',
-    'Z': '61',
-    '!': '62',
-    '"': '63',
-    '#': '64',
-    '$': '65',
-    '%': '66',
-    '&': '67',
-    "'": '68',
-    '(': '69',
-    ')': '70',
-    '*': '71',
-    '+': '72',
-    ',': '73',
-    '-': '74',
-    '.': '75',
-    '/': '76',
-    ':': '77',
-    ';': '78',
-    '<': '79',
-    '=': '80',
-    '>': '81',
-    '?': '82',
-    '@': '83',
-    '[': '84',
-    '\\': '85',
-    ']': '86',
-    '^': '87',
-    '_': '88',
-    '`': '89',
-    '{': '90',
-    '|': '91',
-    '}': '92',
-    '~': '93',
-    ' ': '94',
-    '\t': '95',
-    '\n': '96',
-    '\r': '97',
-    '\x0b': '98',
-    '\x0c': '99'
+                    '0': '00',
+                    '1': '01',
+                    '2': '02',
+                    '3': '03',
+                    '4': '04',
+                    '5': '05',
+                    '6': '06',
+                    '7': '07',
+                    '8': '08',
+                    '9': '09',
+                    'a': '10',
+                    'b': '11',
+                    'c': '12',
+                    'd': '13',
+                    'e': '14',
+                    'f': '15',
+                    'g': '16',
+                    'h': '17',
+                    'i': '18',
+                    'j': '19',
+                    'k': '20',
+                    'l': '21',
+                    'm': '22',
+                    'n': '23',
+                    'o': '24',
+                    'p': '25',
+                    'q': '26',
+                    'r': '27',
+                    's': '28',
+                    't': '29',
+                    'u': '30',
+                    'v': '31',
+                    'w': '32',
+                    'x': '33',
+                    'y': '34',
+                    'z': '35',
+                    'A': '36',
+                    'B': '37',
+                    'C': '38',
+                    'D': '39',
+                    'E': '40',
+                    'F': '41',
+                    'G': '42',
+                    'H': '43',
+                    'I': '44',
+                    'J': '45',
+                    'K': '46',
+                    'L': '47',
+                    'M': '48',
+                    'N': '49',
+                    'O': '50',
+                    'P': '51',
+                    'Q': '52',
+                    'R': '53',
+                    'S': '54',
+                    'T': '55',
+                    'U': '56',
+                    'V': '57',
+                    'W': '58',
+                    'X': '59',
+                    'Y': '60',
+                    'Z': '61',
+                    '!': '62',
+                    '"': '63',
+                    '#': '64',
+                    '$': '65',
+                    '%': '66',
+                    '&': '67',
+                    "'": '68',
+                    '(': '69',
+                    ')': '70',
+                    '*': '71',
+                    '+': '72',
+                    ',': '73',
+                    '-': '74',
+                    '.': '75',
+                    '/': '76',
+                    ':': '77',
+                    ';': '78',
+                    '<': '79',
+                    '=': '80',
+                    '>': '81',
+                    '?': '82',
+                    '@': '83',
+                    '[': '84',
+                    '\\': '85',
+                    ']': '86',
+                    '^': '87',
+                    '_': '88',
+                    '`': '89',
+                    '{': '90',
+                    '|': '91',
+                    '}': '92',
+                    '~': '93',
+                    ' ': '94',
+                    '\t': '95',
+                    '\n': '96',
+                    '\r': '97',
+                    '\x0b': '98',
+                    '\x0c': '99'
 }
 
 
-def uncompress(filename):
-    with open(filename, 'r') as compressed_file:
+def decompress_file(decompress_filename):
+    with open(decompress_filename, 'r') as compressed_file:
         compressed_text = compressed_file.readline()
         compressed_list = compressed_text.split(",")
         final_text = ""
@@ -218,15 +217,15 @@ def uncompress(filename):
                 pi_var = pi.read().replace('\n', '')
                 formatted_digits = re.compile('(..)').findall(pi_var[start_point:start_point + length])
                 for pair in formatted_digits:
-                    final_text += uncompress_dict[pair]
+                    final_text += decompress_dict[pair]
                 return final_text
         with open('output.txt', 'w+') as output:
             output.write(final_text)
 
 
-def compress(text):
+def compress(compress_input_text):
     digit_text = ""
-    for character in text:
+    for character in compress_input_text:
         digit_text += compress_dict[character]
     with open("digits.txt", "r") as pi:
         pi_var = pi.read()
@@ -237,8 +236,8 @@ def compress(text):
             return [False]
 
 
-def random_capitalize(text):
-    word_list = list(text)
+def random_capitalize(random_capitalize_input_text):
+    word_list = list(random_capitalize_input_text)
     new_word_list = []
     for character in word_list:
         if random.randint(0, 1) == 0:
@@ -247,6 +246,57 @@ def random_capitalize(text):
             new_word_list += character.lower()
     complete_string = ''.join(new_word_list)
     return complete_string
+
+
+def exit_compress(exit_compress_input_text):
+    compress_result = compress(exit_compress_input_text)
+    if compress_result[0]:
+        print(f"Found Solution: {compress_result[1]}-{compress_result[2]}")
+    else:
+        print("No result found!")
+        exit()
+
+
+def capitalize_compress(capitalize_input_text, tries):
+    capitalize_pre_compress = compress(capitalize_input_text)
+    if capitalize_pre_compress[0]:
+        print("Found Solution for original Text")
+        print(f"{capitalize_pre_compress[1]}-{capitalize_pre_compress[2]}")
+        exit()
+    for i in range(tries):
+        capitalize_version = random_capitalize(capitalize_input_text)
+        compress_result_capitalize = compress(capitalize_version)
+        if compress_result_capitalize[0]:
+            print(f"Found Solution for {capitalize_version}:")
+            print(f"{compress_result_capitalize[1]}-{compress_result_capitalize[2]}")
+            break
+
+
+def capitalize_compress_many(capitalize_many_input_text, tries):
+    capitalize_many_pre_compress = compress(capitalize_many_input_text)
+    if capitalize_many_pre_compress[0]:
+        print("Found Solution for original Text")
+        print(f"{capitalize_many_pre_compress[1]}-{capitalize_many_pre_compress[2]}")
+        exit()
+    for i in range(tries):
+        capitalize_version = random_capitalize(capitalize_many_input_text)
+        compress_result_capitalize = compress(capitalize_version)
+        if compress_result_capitalize[0]:
+            capitalize_compress_result_dict[capitalize_version] = "%s-%s" % (compress_result_capitalize[1],
+                                                                             compress_result_capitalize[2])
+    if bool(capitalize_compress_result_dict):
+        for v, k in capitalize_compress_result_dict.items():
+            print(f"Found solution for {k}: {v}")
+    else:
+        print("No results found")
+
+
+def small_block_compress(block_input_text):
+    block_pre_compress = compress(block_input_text)
+    if block_pre_compress[0]:
+        print("Found Solution for original Text")
+        print(f"{block_pre_compress[1]}-{block_pre_compress[2]}")
+        exit()
 
 
 if __name__ == "__main__":
@@ -262,20 +312,17 @@ if __name__ == "__main__":
         print("3) Decrease block size automatically")
         print("4) Do 2) and if it fails do 3)")
         option = input(":")
-        if option == ["2", "4"]:
-            cap_tries = input("How often should I try: ")
-        if compress(text):
-            print("Done!")
-        elif option == "1":
-            exit()
+        if option == "1":
+            exit_compress(text)
         elif option == "2":
-            for i in range(int(cap_tries)):
-                version = random_capitalize(text)
-                compress_result = compress(version)
-                if compress_result[0]:
-                    print(f"Found Solution {compress_result[1]}-{compress_result[2]}")
-                    print("Done")
-                    break
+            print("How many variations should I try?")
+            tries_amount = input(":")
+            print("If I find a solution, should I continue (y/N)")
+            answer = input(":")
+            if answer == "y":
+                capitalize_compress_many(text, int(tries_amount))
+            else:
+                capitalize_compress(text, int(tries_amount))
         elif option == "3":
             print("Not yet")
         elif option == "4":
@@ -283,6 +330,6 @@ if __name__ == "__main__":
 
     elif answer == "2":
         file = input("Name of file to decompress: ")
-        print(uncompress(file))
+        print(decompress_file(file))
     else:
         exit()
