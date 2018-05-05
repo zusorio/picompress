@@ -219,7 +219,7 @@ def uncompress(filename):
                 formatted_digits = re.compile('(..)').findall(pi_var[start_point:start_point + length])
                 for pair in formatted_digits:
                     final_text += uncompress_dict[pair]
-                print(final_text)
+                return final_text
         with open('output.txt', 'w+') as output:
             output.write(final_text)
 
@@ -232,9 +232,9 @@ def compress(text):
         pi_var = pi.read()
         if digit_text in pi_var:
             pi_index = pi_var.find(digit_text)
-            print(f"Solution: {pi_index}-{len(digit_text)}")
+            return [True, pi_index, len(digit_text)]
         else:
-            return False
+            return [False]
 
 
 def random_capitalize(text):
@@ -271,7 +271,9 @@ if __name__ == "__main__":
         elif option == "2":
             for i in range(int(cap_tries)):
                 version = random_capitalize(text)
-                if compress(version):
+                compress_result = compress(version)
+                if compress_result[0]:
+                    print(f"Found Solution {compress_result[1]}-{compress_result[2]}")
                     print("Done")
                     break
         elif option == "3":
@@ -281,6 +283,6 @@ if __name__ == "__main__":
 
     elif answer == "2":
         file = input("Name of file to decompress: ")
-        uncompress(file)
+        print(uncompress(file))
     else:
         exit()
