@@ -1,2 +1,2 @@
 # picompress
-Compress text using pi
+With this WIP project you can compress text using Pi. You will need a digits.txt with pi in it. It should have the format 314 and so on. I recommend at least 500MB of pi to be able to compress short text. When you have the digits.txt simply run main.py
